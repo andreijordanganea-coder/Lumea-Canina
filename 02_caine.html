@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        table,
+        th,
+        td {
+            /* border: 1px solid #ddd;
+            border-collapse: collapse; */
+            padding: 12px;
+            /* width: 50%; */
+        }
+
+        /* th {
+            background-color: #f4f4f4;
+            text-align: left;
+        } */
+
+    </style>
+
+    <link rel="stylesheet" href="stil/principal.css">
+
+</head>
+
+<body>
+
+    <aside>
+        <h3>Lumea Canină</h3>
+        <a href="index.html">Introducere</a>
+        <a href="02_rase.html" class="active">Rase de câini</a>
+        <a href="03_ingrijire.html">Îngrijire</a>
+        <a href="04_dresaj.html">Dresaj</a>
+        <a href="06_contact.html">Contact</a>
+    </aside>
+
+    <main style="align-content: center;">
+        <img src="" width="400px" align="left" id="imagineCaine">
+        <table id="userTable">
+            
+            <tbody>
+            </tbody>
+        </table>
+    </main>
+
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get('id');
+
+        const raseCaini = {
+            "golden": { "Inteligență": 4, "Dimensiune": 4, "Nivel de energie": 4, "Agresivitate": 5, "Sociabilitate": 5, "poza": "imagini/golden.jpg" },
+            "cg": { "Inteligență": 5, "Dimensiune": 4, "Nivel de energie": 5, "Agresivitate": 2, "Sociabilitate": 5, "poza": "imagini/ciobanesc_german.jpg" },
+            "beagle": { "Inteligență": 3, "Dimensiune": 2, "Nivel de energie": 4, "Agresivitate": 3, "Sociabilitate": 5, "poza": "imagini/beagle.png" },
+            "pechinez": { "Inteligență": 1, "Dimensiune": 1, "Nivel de energie": 3, "Agresivitate": 4, "Sociabilitate": 3, "poza": "imagini/pechinez.jpg" }
+        };
+        const rasaAleasa = raseCaini[id];
+
+        const img = document.querySelector('#imagineCaine');
+        // img.src = rasaAleasa["poza"];
+        img.src = rasaAleasa["poza"];
+
+        const tableBody = document.querySelector('#userTable tbody');
+
+        for (var numeAtribut in rasaAleasa) {
+            const row = document.createElement('tr');
+            const textCell = document.createElement('td');
+            textCell.innerHTML = numeAtribut.bold();
+
+            const labuteCell = document.createElement('td');
+            labuteCell.align = "left";
+            for (let i = 0; i < rasaAleasa[numeAtribut]; i++) {
+                const paw = document.createElement('img');
+                paw.src = 'imagini/paw.png';
+                paw.style.width = '40px';
+                paw.style.marginRight = '3em';
+                labuteCell.appendChild(paw);
+
+                row.appendChild(textCell);
+                row.appendChild(labuteCell);
+                tableBody.appendChild(row);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
